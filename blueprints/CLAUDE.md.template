@@ -1,0 +1,203 @@
+# __PROJECT_NAME__ - Video Player Implementation
+
+## Project Overview
+This is a __PLATFORM__ video player implementation created from the video-js-demo-wiki blueprints.
+
+**Platform**: __PLATFORM__
+**Created**: __DATE__
+**Version**: 0.1.0
+
+## Architecture
+
+### Core Components
+- Video playback engine
+- UI controls and overlays
+- Streaming protocol handlers
+- Analytics integration
+- Error handling and recovery
+
+### Technology Stack
+__TECH_STACK__
+
+## Development Guidelines
+
+### Code Standards
+- Follow platform-specific best practices
+- Maintain consistent code style
+- Write comprehensive tests
+- Document complex logic
+
+### Testing Strategy
+- Unit tests for business logic
+- Integration tests for API endpoints
+- E2E tests for critical user flows
+- Performance benchmarks
+
+## Subagent Configuration
+
+The following specialized agents are configured for this project:
+
+### Available Agents
+__AGENTS_LIST__
+
+Use these agents by referencing them in your development workflow:
+- `@code-monkey` - For implementation tasks
+- `@tester` - For test creation and validation
+- `@platform-specialist` - For platform-specific optimizations
+- `@ux-guy` - For UI/UX improvements
+- `@product-guy` - For feature planning
+- `@api-sdk-expert` - For API design
+- `@db-manager` - For data layer design
+
+## Quick Start
+
+### Prerequisites
+__PREREQUISITES__
+
+### Installation
+```bash
+__INSTALL_COMMANDS__
+```
+
+### Development
+```bash
+__DEV_COMMANDS__
+```
+
+### Testing
+```bash
+__TEST_COMMANDS__
+```
+
+### Building
+```bash
+__BUILD_COMMANDS__
+```
+
+## Project Structure
+
+```
+__PROJECT_NAME__/
+├── .claude/           # Claude configuration
+│   └── agents/        # Subagent configurations
+├── src/               # Source code
+├── tests/             # Test files
+├── docs/              # Documentation
+├── config/            # Configuration files
+└── ...                # Platform-specific files
+```
+
+## Video Player Features
+
+### Supported Formats
+- HLS (HTTP Live Streaming)
+- DASH (Dynamic Adaptive Streaming)
+- Progressive MP4
+- WebM
+
+### Core Features
+- [ ] Basic playback controls (play, pause, seek)
+- [ ] Volume control
+- [ ] Fullscreen support
+- [ ] Quality selection
+- [ ] Subtitle/Caption support
+- [ ] Playback speed control
+- [ ] Picture-in-Picture (where supported)
+- [ ] Keyboard shortcuts
+- [ ] Touch gestures (mobile)
+- [ ] Chromecast/AirPlay support
+
+### Advanced Features
+- [ ] Adaptive bitrate streaming
+- [ ] DRM support
+- [ ] Analytics tracking
+- [ ] Playlist support
+- [ ] Live streaming
+- [ ] DVR functionality
+- [ ] Ad insertion
+- [ ] Thumbnails preview
+- [ ] Chapter markers
+- [ ] Audio track selection
+
+## API Reference
+
+### Player API
+```javascript
+// Initialize player
+const player = new VideoPlayer(config);
+
+// Control playback
+player.play();
+player.pause();
+player.seek(seconds);
+
+// Events
+player.on('play', handler);
+player.on('pause', handler);
+player.on('ended', handler);
+player.on('error', handler);
+```
+
+## Configuration
+
+### Player Configuration
+```javascript
+{
+  autoplay: false,
+  controls: true,
+  preload: 'metadata',
+  fluid: true,
+  responsive: true,
+  sources: [{
+    src: 'video.m3u8',
+    type: 'application/x-mpegURL'
+  }]
+}
+```
+
+## Troubleshooting
+
+### Common Issues
+1. **Playback not starting**: Check network connectivity and CORS settings
+2. **Quality switching issues**: Verify adaptive streaming configuration
+3. **Mobile playback problems**: Ensure proper viewport settings
+4. **DRM content not playing**: Validate license server configuration
+
+## Performance Optimization
+
+### Best Practices
+- Implement lazy loading for video assets
+- Use appropriate preload strategies
+- Optimize thumbnail generation
+- Implement efficient buffering strategies
+- Monitor and log performance metrics
+
+## Security Considerations
+
+- Implement proper CORS policies
+- Use HTTPS for all video delivery
+- Validate and sanitize all inputs
+- Implement rate limiting
+- Use secure token authentication for premium content
+
+## Contributing
+
+1. Follow the established code style
+2. Write tests for new features
+3. Update documentation
+4. Submit pull requests for review
+
+## Resources
+
+- [Video.js Documentation](https://videojs.com/guides/)
+- [HLS.js Documentation](https://github.com/video-dev/hls.js)
+- [Platform Documentation](__PLATFORM_DOCS__)
+- [Project Wiki](/workspaces/video-js-demo-wiki)
+
+## License
+
+[Specify your license here]
+
+---
+
+Generated from video-js-demo-wiki blueprints on __DATE__

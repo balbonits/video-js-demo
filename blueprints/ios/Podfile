@@ -1,0 +1,35 @@
+platform :ios, '15.0'
+use_frameworks!
+
+target '__PROJECT_NAME__' do
+  # Core pods
+  pod 'Alamofire', '~> 5.8'
+  pod 'SwiftyJSON', '~> 5.0'
+
+  # Video player related
+  pod 'PIPKit', '~> 0.3'
+
+  # Analytics
+  # pod 'Firebase/Analytics'
+  # pod 'Firebase/Crashlytics'
+
+  target '__PROJECT_NAME__Tests' do
+    inherit! :search_paths
+    # Test pods
+    pod 'Quick'
+    pod 'Nimble'
+  end
+
+  target '__PROJECT_NAME__UITests' do
+    inherit! :search_paths
+    # UI Test pods
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+    end
+  end
+end

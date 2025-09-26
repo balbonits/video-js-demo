@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  streaming-service:
+    build: .
+    container_name: streaming-service
+    ports:
+      - "3001:3001"
+      - "9090:9090"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://streaming_user:streaming_pass@postgres:5432/streaming_db
+      - REDIS_HOST=redis
+      - MINIO_ENDPOINT=minio
+    depends_on:
+      - postgres
+      - redis
+      - minio
+    volumes:
+      - ./temp:/app/temp
+      - ./logs:/app/logs
+    networks:
+      - streaming-network
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: streaming-postgres
+    environment:
+      - POSTGRES_USER=streaming_user
+      - POSTGRES_PASSWORD=streaming_pass
+      - POSTGRES_DB=streaming_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - streaming-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U streaming_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: streaming-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - streaming-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: streaming-minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - streaming-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+networks:
+  streaming-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  minio-data:
